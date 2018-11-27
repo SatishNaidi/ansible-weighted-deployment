@@ -1,0 +1,19 @@
+- name: Install yum packages using a list
+  yum:
+    state: present
+    name: 
+      - httpd
+      - git
+
+- name: Clone the git repository
+  git:
+    repo: "{{ git_repo }}"
+    dest: /var/www/html/
+  register: response
+
+- name: start httpd
+  service: 
+    name: httpd 
+    state: started
+
+
